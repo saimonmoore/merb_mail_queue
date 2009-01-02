@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 require File.dirname(__FILE__) / '..' / "lib" / "merb_mail_queue"
+require File.dirname(__FILE__) / "active_record_helper"
 Merb::MailQueue.load_plugin!
 
 describe Merb::MailQueue, "default plugin configuration" do

@@ -6,11 +6,16 @@ describe Merb::MailQueue do
   before :all do
     @adapter_path = File.dirname(__FILE__) / ".." / "lib" / "merb_mail_queue" / "adapters"
     @ar_path      = @adapter_path / "activerecord"
+    @dm_path      = @adapter_path / "datamapper"
   end  
   
   def register_active_record!
     Merb::MailQueue.register_adapter :activerecord, "#{@adapter_path}/activerecord"
   end
+  
+  def register_datamapper!
+    Merb::MailQueue.register_adapter :datamapper, "#{@adapter_path}/datamapper"
+  end  
   
   def clear_adapter_list!
     Merb::MailQueue.clear_adapter_list!
@@ -37,15 +42,21 @@ describe Merb::MailQueue do
       Merb::MailQueue.adapters.keys.should include(:activerecord)
     end
     
-    it "registers DataMapper adapter on initialization"
+    
+    it "registers DataMapper adapter on initialization" do
+      Merb::MailQueue.adapters.should be_a_kind_of(Hash)
+      Merb::MailQueue.adapters.keys.should include(:datamapper)
+    end
     
     it "registers Sequel adapter on initialization"
     
     it "adds adapter / path to adapters list" do
       clear_adapter_list!
       register_active_record!
+      register_datamapper!
       
       Merb::MailQueue.adapters[:activerecord][:path].should == @ar_path
+      Merb::MailQueue.adapters[:datamapper][:path].should == @dm_path
     end
   end
   

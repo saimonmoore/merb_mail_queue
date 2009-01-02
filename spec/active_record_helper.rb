@@ -21,6 +21,9 @@ class MailQueueJobMigration < ActiveRecord::Migration
 end
 MailQueueJobMigration.up
 
+class MailQueueJob < ActiveRecord::Base
+end
+
 def clear_mail_queue
   MailQueueJob.delete_all
 end

@@ -3,6 +3,7 @@ require 'merb-core'
 require 'spec'
 require 'merb-mailer'
 require 'activerecord'
+require 'dm-core'
 
 class Merb::Mailer
   self.delivery_method = :test_send
@@ -12,9 +13,6 @@ module Merb
   def self.orm_generator_scope
     :activerecord
   end
-end
-
-class MailQueueJob < ActiveRecord::Base
 end
 
 def clear_deliveries

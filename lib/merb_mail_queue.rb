@@ -8,6 +8,7 @@ if defined?(Merb::Plugins)
   
   adapter_path = File.dirname(__FILE__) / "merb_mail_queue" / "adapters"
   Merb::MailQueue.register_adapter :activerecord, "#{adapter_path}/activerecord"
+  Merb::MailQueue.register_adapter :datamapper, "#{adapter_path}/datamapper"
   
   Merb::Plugins.config[:merb_mail_queue] = {
     :mail_queue_job_model_class_name => "MailQueueJob"
