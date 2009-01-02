@@ -3,7 +3,7 @@ module Merb
     module MailQueueMixin
       
       def queue_mail(klass, method, mail_params, send_params = nil)
-        klass.new(send_params || {}).dispatch_and_queue(method, mail_params)
+        klass.new(send_params || params, self).dispatch_and_queue(method, mail_params)
       end
       
     end
